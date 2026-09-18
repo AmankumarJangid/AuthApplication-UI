@@ -1,0 +1,77 @@
+.marquee-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 100%;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.content-layer {
+  position: relative;
+  z-index: 1;
+}
+
+.tap1-wrapper .tap2-wrapper{
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+   /* try 45deg / 75deg */
+  transform-origin: center;
+}
+
+.tap1-wrapper{
+    transform: rotate(10deg) translate(0px , 50vh) translateY(-20vh);
+}
+
+.tap2-wrapper{
+    
+    transform:  rotate(-10deg) translate(0px ,50vh) translateY(-20vh); 
+}
+
+.security-tape {
+  position: absolute;
+  left: -20%;
+  top: 15%;
+  width: 200%;
+  height: 26px;
+
+  background-image: url('@/assets/securityStrip.svg');
+  background-repeat: repeat;
+  background-size: 500px 26px;
+  background-position: 0 0;
+
+  opacity: 0.9;
+  animation: infiniteScroll 12s linear infinite;
+}
+
+@keyframes diagonalPattern {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 500px 220px;
+  }
+}
+
+
+@keyframes infiniteScroll {
+    0% {
+        transform: translate3d(0, 0, 0);
+    }
+
+    100% {
+        /* Shifts the background left by half its width, then instantly resets */
+        transform: translate3d(-25%, 0, 0);
+    }
+}
+
+@keyframes diagonalScroll {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(30deg);
+  }
+  100% {
+    transform: translate3d(-50%, 120px, 0) rotate(30deg);
+  }
+}
