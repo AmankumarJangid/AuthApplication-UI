@@ -19,7 +19,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import apiClient from "@/utils/axiosInterceptor"
 import { store } from "@/redux/store.ts";
-import { setCredentials  } from "@/redux/slices/AuthSlice"
+import { setCredentials  } from "@/redux/slices/authSlice"
 import { handleLogin } from "@/utils/handleAuthRequeset"
 
 const FormSchema = z.object({
