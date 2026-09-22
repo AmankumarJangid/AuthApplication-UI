@@ -3,7 +3,7 @@ import { NavLink, Outlet, useNavigate } from 'react-router'
 import { Button } from './ui/button'
 import { ModeToggle } from './mode-toggle'
 import { Circle, Menu } from 'lucide-react'
-import { selectAccessToken, selectUser } from '@/redux/slices/AuthSlice'
+import { selectAccessToken, selectUser } from '@/redux/slices/authSlice.ts'
 import { useSelector } from 'react-redux'
 import { handleLogout } from '@/utils/handleAuthRequeset'
 
