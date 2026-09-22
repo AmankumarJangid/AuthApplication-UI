@@ -1,7 +1,7 @@
 import axios, { AxiosError, type InternalAxiosRequestConfig } from 'axios';
 import { store } from '@/redux/store';
 import { logOut, setCredentials } from '@/redux/slices/authSlice';
-import { setLoading , selectIsLoading } from '@/redux/slices/appSlice';
+import { setLoading  } from '@/redux/slices/appSlice';
 import { API_BASE_URL } from './appConstants';
 
 let isRefreshing: boolean = false;
@@ -86,7 +86,7 @@ apiClient.interceptors.response.use(
 
       switch (status) {
         case 400:
-          console.error('Bad Request:', data.message || 'Validation failed');
+          console.error('Bad Request:', data?.message || 'Validation failed');
           // Handle validation errors (e.g., alert user or map to form fields)
           break;
         case 401:
