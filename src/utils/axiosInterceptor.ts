@@ -2,6 +2,7 @@ import axios, { AxiosError, type InternalAxiosRequestConfig } from 'axios';
 import { store } from '@/redux/store';
 import { logOut, setCredentials } from '@/redux/slices/authSlice';
 import { setLoading , selectIsLoading } from '@/redux/slices/appSlice';
+import { API_BASE_URL } from './appConstants';
 
 let isRefreshing: boolean = false;
 let failedQueue: any[] = [];
@@ -28,7 +29,7 @@ const stopLoading = (config : CustomAxiosRequestConfig) => {
 };
 
 // Helper to process all blocked requests once the new token arrives
-const processQueue = (error: any, token: string | null = null) => {
+const processQueue = (error: unknown, token: string | null = null) => {
   failedQueue.forEach((prom) => {
     if (error) {
       prom.reject(error);
@@ -40,7 +41,7 @@ const processQueue = (error: any, token: string | null = null) => {
 };
 
 const apiClient = axios.create({
-  baseURL: 'http://localhost:8082/api/v1', // Replace with your backend API base URL
+  baseURL: API_BASE_URL, // Replace with your backend API base URL
   headers: {
     'Content-Type': 'application/json',
   },

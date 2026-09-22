@@ -17,6 +17,7 @@ import { useEffect, useState } from 'react'
 import apiClient from './utils/axiosInterceptor'
 import { setCredentials } from './redux/slices/authSlice'
 import type { AxiosError } from 'axios'
+import { OtpForm } from './components/otp-form'
 function App() {
   const dispatch = useDispatch();
   const isNetworkLoading = useSelector(selectIsLoading);
@@ -100,6 +101,7 @@ function App() {
             <Route path="login" element={<LoginPanel/>} />
             <Route path="signup" element={<SignupPanel/>} />
             <Route path="failure" element={<AuthFailure/>} />
+            <Route path="verify-otp" element={<OtpForm/>} />
           </Route>
         </Route>
       </Routes>

@@ -12,12 +12,13 @@ import {
 } from "@/components/ui/field"
 import { Input } from "@/components/ui/input"
 import { Eye, EyeOff, GalleryVerticalEndIcon } from "lucide-react"
-import { Link } from "react-router"
+import { Link, useNavigate } from "react-router"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import React, { useState } from "react"
 import apiClient from "@/utils/axiosInterceptor"
+import { OtpPurpose } from "@/utils/handleAuthRequeset"
 
 
 interface FormProps extends React.ComponentProps<"div">{
@@ -43,6 +44,8 @@ export function SignupForm({
   const [showPassword, setShowPassword] = useState(false)
 const [showReEnterPassword, setShowReEnterPassword] = useState(false)
 
+  const navigate = useNavigate();
+
   const { register, formState: { errors, isSubmitting }, handleSubmit } = useForm<z.infer<typeof FormSchema>>({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -56,14 +59,20 @@ const [showReEnterPassword, setShowReEnterPassword] = useState(false)
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     
     console.log("Form submitted:", data);
-    const response = await apiClient.post( "/auth/register" ,
-      {
-        name : data.username,
-        password : data.password,
-        email : data.email
-      },
-     );
 
+    const formData = {
+      username : data.username,
+      password : data.password,
+      email : data.email
+    }
+
+    navigate("/auth/verify-otp", {
+      state: {
+        flow: OtpPurpose.REGISTRATION, // Must match "register" | "reset_password" | "2fa"
+        data: formData,
+  }});
+
+   
     console.log("Form submitted:", response?.data);
   };
 

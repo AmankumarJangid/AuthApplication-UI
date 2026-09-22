@@ -20,6 +20,7 @@ import { z } from "zod"
 import apiClient from "@/utils/axiosInterceptor"
 import { store } from "@/redux/store.ts";
 import { setCredentials  } from "@/redux/slices/AuthSlice"
+import { handleLogin } from "@/utils/handleAuthRequeset"
 
 const FormSchema = z.object({
   email: z.email({ message: "Invalid email address" }),
@@ -46,20 +47,15 @@ export function LoginForm({
 
   const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     console.log("Form submitted:", data);
-    const response = await apiClient.post( "/auth/login" ,
-      {
+
+    const formData = {
         password : data.password,
         email : data.email
-      },
-     );
-
-    console.log("Form submitted:", response?.data);
-
-    store.dispatch(setCredentials({
-      accessToken : response?.data?.accessToken,
-      user : response?.data?.user
-    }))
-
+      };
+      
+    
+    handleLogin(formData);
+    
     console.log( "State : " , store.getState().auth);
   }
 
