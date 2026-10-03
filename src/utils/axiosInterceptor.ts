@@ -92,7 +92,7 @@ apiClient.interceptors.response.use(
         case 401:
 
           // ✅ SAFEGUARD: Prevent infinite loops if the refresh call fails with a 401
-          if (originalRequest?.url === '/auth/refresh' || originalRequest?.url?.endsWith('/auth/refresh')) {
+          if (originalRequest?.url === '/auth/refresh' || originalRequest?.url?.endsWith('auth/refresh')) {
             processQueue(error, null);
             store.dispatch(logOut());
             return Promise.reject(error);

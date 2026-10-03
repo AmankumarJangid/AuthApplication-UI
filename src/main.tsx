@@ -5,13 +5,16 @@ import App from './App.tsx'
 import { BrowserRouter } from "react-router"
 import { ThemeProvider } from './components/theme-provider.tsx'
 import ReduxProvider from './redux/ReduxProvider.tsx'
+import { AuthInterceptor } from './components/AuthInterceptor.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ThemeProvider>
       <ReduxProvider>
         <BrowserRouter>
-          <App />
+          <AuthInterceptor>
+            <App />
+          </AuthInterceptor>
         </BrowserRouter>
       </ReduxProvider>
     </ThemeProvider>

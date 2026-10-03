@@ -2,6 +2,7 @@ import axios from "axios";
 import apiClient from "./axiosInterceptor";
 import { logOut, setCredentials } from "@/redux/slices/authSlice";
 import { store } from "@/redux/store";
+import { AUTH_SERVER_BASE_URL } from "./appConstants";
 
 // ==========================================
 // Enums & Interfaces
@@ -149,3 +150,19 @@ export const handleVerifyOtp = async (data: OtpVerification): Promise<boolean> =
     return false;
   }
 };
+
+export const handleLoginWithGoogle = (redirect_to: string): void => {
+
+  if( redirect_to === undefined || redirect_to === null || redirect_to.trim() === "") {
+    redirect_to = window.location.origin;
+  }
+  window.location.href = `${AUTH_SERVER_BASE_URL}/oauth2/authorization/google?redirect_to=${encodeURIComponent(redirect_to)}`;
+}
+
+export const handleLoginWithGithub = (redirect_to: string): void => {
+
+  if( redirect_to === undefined || redirect_to === null || redirect_to.trim() === "") {
+    redirect_to = window.location.origin;
+  }
+  window.location.href = `${AUTH_SERVER_BASE_URL}/oauth2/authorization/github?redirect_to=${encodeURIComponent(redirect_to)}`;
+}
