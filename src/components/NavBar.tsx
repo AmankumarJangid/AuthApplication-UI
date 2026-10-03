@@ -112,7 +112,7 @@ const NavBar = () => {
                                     // Prevent race condition by letting the click register 
                                     // before unmounting the menu component
                                     setIsOpen(false);
-                                    navigate('/login');
+                                    navigate('/auth/login');
 
                                 }}
                             >
@@ -124,7 +124,7 @@ const NavBar = () => {
                                 className="w-full"
                                 onClick={(e) => {
                                     setIsOpen(false);
-                                    navigate('/signup');
+                                    navigate('/auth/signup');
                                 }}
                             >
                                 Register
